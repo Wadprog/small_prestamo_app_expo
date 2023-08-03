@@ -17,7 +17,7 @@ function FormField({ name, ...otherProps }) {
         onChangeText={handleChange(name)}
         {...otherProps}
       />
-      <Error error={errors[name]} visible={touched[name]} style={tw`block`} />
+      <Error error={errors[name]} visible={touched[name]} style={tw``} />
     </>
   )
 }

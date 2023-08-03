@@ -31,7 +31,7 @@ const ImageInput = ({
     <TouchableWithoutFeedback onPress={handleChange}>
       <View
         style={[
-          tw`bg-blue-200 p-4 rounded-[45px] w-30 h-30 flex justify-center items-center m-2 overflow-hidden drop-shadow-sm`,
+          tw`bg-blue-200 p-4 rounded-[45px] w-30 h-30 flex justify-center items-center m-2 overflow-hidden `,
           style,
         ]}
       >

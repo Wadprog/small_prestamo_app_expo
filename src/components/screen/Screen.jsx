@@ -2,16 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { SafeAreaView } from 'react-native'
 import { Layout } from '@ui-kitten/components'
-import LottieView from 'lottie-react-native'
-
-import { View } from 'react-native'
 
 import tw from '../../lib/tailwind'
 import Wrapper from './components/Wrapper'
 import DefaultPageLoading from './components/PageLoading'
 
 function Screen({ children, loading = false, error = false, safeArea = true }) {
-  console.log({ error })
   return (
     <Layout style={tw`flex-1 `}>
       {loading ? (

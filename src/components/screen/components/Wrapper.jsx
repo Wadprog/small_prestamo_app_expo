@@ -26,8 +26,8 @@ const Wrapper = ({ children, error }) => (
 )
 
 Wrapper.propTypes = {
-  children: Proptypes.node.Required,
-  error: Proptypes.object,
+  // children: Proptypes.any.Required,
+  error: Proptypes.oneOfType([Proptypes.bool, Proptypes.object]),
 }
 
 export default Wrapper

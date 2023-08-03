@@ -92,10 +92,9 @@ const DrawerContent = (props) => {
 
               <View style={{ marginLeft: 15, flexDirection: 'column' }}>
                 <Text category="h5" style={tw`capitalize`}>
-                  {auth.user.Person.given_name}{' '}
-                  {auth.user.Person.familly_name[0]}.
+                  {auth.user.person.givenName} {auth.user.person.familyName[0]}.
                 </Text>
-                <Text category="s1">{auth.user.Person.familly_name}</Text>
+                <Text category="s1">{auth.user.company.name}</Text>
               </View>
             </View>
           </View>

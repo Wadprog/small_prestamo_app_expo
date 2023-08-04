@@ -5,7 +5,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import * as action from './api'
 import { endpoints } from '../config'
 import { setHeader } from '../middleware/api'
-
+import { store } from '../lib/cache'
 const url = endpoints.REGISTER
 
 const initialState = {
@@ -28,6 +28,10 @@ export const Auth = createSlice({
       setHeader('authorization', action.payload.accessToken)
       state.loading = false
       state.user = action.payload.Person
+      store('user', {
+        Person: action.payload.Person,
+        accessToken: action.payload.accessToken,
+      })
       state.lastFetch = Date.now()
     },
     getAccountRequested: (state) => {
@@ -65,6 +69,7 @@ export const Auth = createSlice({
       state.loading = false
       state.user = action.payload
       state.lastFetch = Date.now()
+      store('user', action.payload)
     },
     updateFailed: (state, action) => {
       state.loading = false

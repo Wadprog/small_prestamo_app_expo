@@ -2,42 +2,36 @@ import { View } from 'react-native'
 import React from 'react'
 import { List, Divider } from '@ui-kitten/components'
 
-import tw from '../../../lib/tailwind'
-import Input from '../../../components/Input'
-import Screen from '../../../components/screen/Screen'
-import TextButton from '../../../components/TextButton'
-import Loan from '../../../components/Loan/Loan.component'
 import Header from './components/Header'
+import FilterModal from './components/Modal/FilterModal'
+import Screen from '../../../components/screen/Screen'
+import Loan from '../../../components/Loan/Loan.component'
+import LoanEmptyList from '../../../components/FullError'
 
 const Timeline = () => {
-  const Loans = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]
+  const Loans = [
+    { id: 1 },
+    { id: 2 },
+    { id: 3 },
+    { id: 4 },
+    { id: 5 },
+    { id: 6 },
+  ]
+  const [filterOpen, setFilterOpen] = React.useState(false)
   return (
     <Screen>
-      <Header />
-      {/* <View style={tw`h-[30] bg-[#6255af] px-5 pt-3`}>
-        <Input
-          placeholder="Search"
-          style={tw` bg-white`}
-          icon="swap-horizontal"
-          append={{
-            icon: 'filter-outline',
-            onPress: () => {
-              console.log('search')
-            },
-          }}
-        />
-        <View style={tw` w-3/4 flex flex-row justify-between items-center`}>
-          <TextButton label="Loans in Debts" />
-          <TextButton label="Today's Loan" />
-          <TextButton label="Active Loans" />
-        </View>
-      </View> */}
+      <Header onFileterBtnPress={() => setFilterOpen(true)} />
 
-      <List
-        data={Loans}
-        renderItem={({ item, idx }) => <Loan />}
-        ItemSeparatorComponent={Divider}
-      />
+      {Loans.length === 0 ? (
+        <LoanEmptyList errorMsg="No loan in this category" secondLine="" />
+      ) : (
+        <List
+          data={Loans}
+          renderItem={({ item, idx }) => <Loan />}
+          ItemSeparatorComponent={Divider}
+        />
+      )}
+      <FilterModal visible={filterOpen} OnClose={() => setFilterOpen(false)} />
     </Screen>
   )
 }

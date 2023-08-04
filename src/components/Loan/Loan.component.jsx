@@ -6,7 +6,7 @@ import tw from '../../lib/tailwind'
 
 const Loan = () => {
   return (
-    <Card style={tw`my-2 rounded-3xl mx-1`}>
+    <Card style={tw`my-2 rounded-xl mx-1`}>
       <View style={tw`flex flex-row items-center justify-between`}>
         <View style={tw`flex flex-row items-center justify-center`}>
           <Text category="h6" style={tw`mr-2`}>
@@ -24,15 +24,15 @@ const Loan = () => {
       <Divider style={tw` bg-gray-100 my-2`} />
       <View style={tw`flex flex-row items-center justify-between`}>
         <View style={tw`p-1 bg-gray-100 rounded-full my-1`}>
-          <Text category="c6" appearance="hint" style={tw`text-black`}>
+          <Text category="c6" style={tw`text-black`}>
             Active
           </Text>
         </View>
 
-        <Text category="c6" appearance="hint" style={tw`font-bold`}>
+        <Text category="c6" style={tw`font-bold`}>
           1.5 %
         </Text>
-        <Text category="c6" appearance="hint" style={tw`font-bold`}>
+        <Text category="c6" style={tw`font-bold`}>
           6 months
         </Text>
       </View>

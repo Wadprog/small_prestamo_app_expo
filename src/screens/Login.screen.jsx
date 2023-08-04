@@ -42,7 +42,7 @@ const LoginScreen = ({ navigation }) => {
                 username: '',
                 password: '',
               }}
-              onSubmit={() => {}}
+              onSubmit={handleSubmit}
             >
               <Field
                 required

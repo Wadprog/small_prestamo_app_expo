@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Image, Alert, TouchableHighlight } from 'react-native'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+// import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
@@ -113,20 +113,20 @@ const RegistrationStepsContainer = () => {
           </View>
 
           <View style={tw`flex-1 flex px-4 pt-2`}>
-            <KeyboardAwareScrollView>
-              <Step
-                formValues={formsData[stepsToObject[currentPosition]]}
-                onError={(val) => setErr(val)}
-                handleSubmit={handleSubmit}
-                title={steps[currentPosition].label}
-                onBack={() => {
-                  if (currentPosition <= 1) {
-                    return Alert.alert('You can not go back')
-                  }
-                  return setCurrentPosition((position) => position - 1)
-                }}
-              />
-            </KeyboardAwareScrollView>
+            {/* <KeyboardAwareScrollView> */}
+            <Step
+              formValues={formsData[stepsToObject[currentPosition]]}
+              onError={(val) => setErr(val)}
+              handleSubmit={handleSubmit}
+              title={steps[currentPosition].label}
+              onBack={() => {
+                if (currentPosition <= 1) {
+                  return Alert.alert('You can not go back')
+                }
+                return setCurrentPosition((position) => position - 1)
+              }}
+            />
+            {/* </KeyboardAwareScrollView> */}
           </View>
         </View>
       </View>

@@ -1,5 +1,5 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { NavigationContainer } from '@react-navigation/native'
 import AppNavigation from './Drawer'
@@ -9,22 +9,23 @@ import PaymentNavigator from './Payment.navigation'
 import { getCurrentUser } from '../store/auth'
 
 // import AppTheme from './theme'
-// import storage from '../utility/secureCache'
-// import { logged } from '../store/auth'
+import { get } from '../lib/cache'
+import { logged } from '../store/auth'
 
 function Routes() {
   const auth = useSelector(getCurrentUser)
-  console.log('nav_auth', auth)
-  //   const dispatch = useDispatch()
-  //   const restoreUser = async () => {
-  // const token = await storage.get('auth')
-  // if (!token) return
-  // dispatch({ type: logged, payload: { token } })
-  //   }
 
-  //   useEffect(() => {
-  //     restoreUser()
-  //   }, [])
+  const dispatch = useDispatch()
+  const restoreUser = async () => {
+    const user = await get('user')
+    console.log('user', user)
+    if (!user) return
+    dispatch({ type: logged, payload: { user } })
+  }
+
+  useEffect(() => {
+    restoreUser()
+  }, [])
   return (
     <NavigationContainer>
       {!auth.user ? (

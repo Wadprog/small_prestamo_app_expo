@@ -6,18 +6,22 @@ import Text from './Text'
 import Button from './Button'
 import tw from '../lib/tailwind'
 
-const FullError = ({ errorMsg, onReload }) => {
+const defaultSecondLine = `If the problem persist contact support`
+const FullError = ({
+  errorMsg,
+  onReload,
+  secondLine = true,
+  secondlIneMessage,
+}) => {
   return (
-    <View
-      style={tw` w-full  h-full justify-center items-center  rounded-2xl`}
-    >
+    <View style={tw` w-full  h-full justify-center items-center  rounded-2xl`}>
       <MaterialCommunityIcons
         name="emoticon-sad-outline"
         size={78}
         color={tw.color(`color-danger-500`)}
       />
       <Text category="h6">{errorMsg || "It's seems there is an error"} </Text>
-      <Text> If the problem persist contact support</Text>
+      {secondLine && <Text>{secondlIneMessage || defaultSecondLine}</Text>}
       {onReload && (
         <Button appearance="ghost" title="Realod" onPress={onReload} />
       )}

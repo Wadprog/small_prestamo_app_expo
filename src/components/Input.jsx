@@ -1,18 +1,12 @@
 import React from 'react'
 // Dependencies
 
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  TouchableHighlight,
-  Text,
-} from 'react-native'
+import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 
 import { ThemeContext } from '../context/theme.context'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import PropTypes from 'prop-types'
-import { Input } from '@ui-kitten/components'
+
 // Customs Dependencies
 
 import defaultStyles from '../config/styles'
@@ -54,13 +48,13 @@ function AppInput({ style, icon, append = undefined, ...otherProps }) {
       )}
       <TextInput {...otherProps} style={[tw`flex-1`, defaultStyles.text]} />
       {append && (
-        <TouchableHighlight onPress={append.onPress}>
+        <TouchableOpacity onPress={append.onPress}>
           <MaterialCommunityIcons
             name={append.icon}
             size={20}
             style={styles.icon}
           />
-        </TouchableHighlight>
+        </TouchableOpacity>
       )}
     </View>
   )

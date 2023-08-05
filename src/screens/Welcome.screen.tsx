@@ -2,11 +2,10 @@ import { View, Image } from 'react-native'
 import React from 'react'
 
 import tw from '../lib/tailwind'
-import text from '../config/text'
 import image from '../config/image'
 import Text from '../components/Text'
-import Screen from '../components/screen/Screen'
 import Button from '../components/Button'
+import Screen from '../components/screen'
 
 // Main Function To Export
 const WelcomeScreen = ({ navigation }) => (

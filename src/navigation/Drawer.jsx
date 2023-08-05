@@ -17,6 +17,7 @@ const DrawerNav = () => {
       screenOptions={{
         headerTitle: '',
         headerShadowVisible: false,
+        headerTintColor: tw.color('white'),
         headerStyle: {
           backgroundColor: tw.color('color-primary-500'),
         },

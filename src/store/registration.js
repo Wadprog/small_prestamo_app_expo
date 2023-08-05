@@ -90,7 +90,6 @@ export const Register = (newUser) => (dispatch) => {
     })
   )
 }
-
 export const getAccount = () => (dispatch, getState) => {
   const id = getState().authentication.user.id
 
@@ -104,10 +103,10 @@ export const getAccount = () => (dispatch, getState) => {
     })
   )
 }
-export const Login = (credentials) => (dispatch) => {
+export const login = (credentials) => (dispatch) => {
   dispatch(
     action.apiCallBegan({
-      url: '/authentification',
+      url: '/authentication',
       data: credentials,
       method: 'POST',
       onSuccess: Auth.actions.loginSucceed.type,

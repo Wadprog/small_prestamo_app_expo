@@ -18,7 +18,7 @@ import {
 import Text from '../components/Text'
 import { ThemeContext } from '../context/theme.context'
 
-import Screen from '../components/screen/Screen'
+import Screen from '../components/screen'
 import routes from '../navigation/routes'
 import { getCurrentUser, logout } from '../store/auth'
 

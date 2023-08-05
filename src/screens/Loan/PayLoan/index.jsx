@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Text from '../../../components/Text'
-import Screen from '../../../components/screen/Screen'
+import Screen from '../../../components/screen'
 
 const AddLoan = () => {
   return (

@@ -5,9 +5,9 @@ import PropTypes from 'prop-types'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 // Custom dependencies
-import tw from '../../lib/tailwind'
-import { Form, Submit } from '../../components/form'
-import SettingSwitch from '../../components/form/SettingSwitch'
+import tw from '../lib/tailwind'
+import { Form, Submit } from '../components/form'
+import SettingSwitch from '../components/form/SettingSwitch'
 
 const ValidationSchema = Yup.object().shape({
   setting: Yup.boolean().required().label('setting').nullable(),

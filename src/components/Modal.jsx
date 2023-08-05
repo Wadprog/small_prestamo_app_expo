@@ -1,10 +1,9 @@
 import { View, Modal, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { MaterialComunityIcons } from '@expo/vector-icons'
-import Button from './Button'
+
 import tw from '../lib/tailwind'
 
-import { Icon } from '@ui-kitten/components'
+import { Icon, Layout } from '@ui-kitten/components'
 
 const CustomModal = ({ visible, OnClose, children, ...otherProps }) => {
   return (
@@ -16,8 +15,8 @@ const CustomModal = ({ visible, OnClose, children, ...otherProps }) => {
     >
       <View style={tw`h-full`}>
         <View style={tw`h-[50%]`}></View>
-        <View
-          style={tw.style(`bg-base-100 h-[50%] rounded-3xl p-3`, {
+        <Layout
+          style={tw.style(` h-[50%] rounded-3xl p-3`, {
             shadowColor: '#000',
             shadowOffset: {
               width: 0,
@@ -50,7 +49,7 @@ const CustomModal = ({ visible, OnClose, children, ...otherProps }) => {
           </TouchableOpacity>
 
           {children}
-        </View>
+        </Layout>
       </View>
     </Modal>
   )

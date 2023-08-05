@@ -40,7 +40,7 @@ const PageWrapper = ({ children }) => {
         </LinearGradient>
 
         <View
-          style={tw`place-items-center bg-gray-100 shadow-t-2xl rounded-t-[30px] lg:rounded-none px-4 md:px-8 -mt-28 z-10 md:mx-36 lg:mt-0 lg:mx-0 lg:h-screen pt-5`}
+          style={tw`place-items-center bg-gray-100 shadow-t-2xl rounded-t-[30px] lg:rounded px-4 md:px-8 -mt-28 z-10 md:mx-36 lg:mt-0 lg:mx-0 lg:h-screen pt-5`}
         >
           {children}
         </View>

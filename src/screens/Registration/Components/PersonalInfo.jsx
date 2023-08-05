@@ -4,8 +4,14 @@ import * as Yup from 'yup'
 import { TouchableWithoutFeedback } from '@ui-kitten/components/devsupport'
 import Proptypes from 'prop-types'
 // Core components
-import tw from '../../lib/tailwind'
-import { Form, Field, Submit, Switch, ImageField } from '../../components/form'
+import tw from '../../../lib/tailwind'
+import {
+  Form,
+  Field,
+  Submit,
+  Switch,
+  ImageField,
+} from '../../../components/form'
 
 const ValidationSchema = Yup.object().shape({
   phone: Yup.string().required().min(10).label('Phone'),
@@ -47,7 +53,7 @@ const PersonalInfo = ({ handleSubmit, formValues }) => {
     >
       <View style={tw`flex-1`}>
         <View style={tw`flex flex-row justify-between `}>
-          <ImageField />
+          <ImageField name="profilePicture" />
           <View style={tw`flex-1 ml-3 rounded-xl`}>
             <Field
               required

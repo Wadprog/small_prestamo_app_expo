@@ -4,7 +4,7 @@ import { List, Divider } from '@ui-kitten/components'
 
 import Header from './components/Header'
 import FilterModal from './components/Modal/FilterModal'
-import Screen from '../../../components/screen/Screen'
+import Screen from '../../../components/screen'
 import Loan from '../../../components/Loan/Loan.component'
 import LoanEmptyList from '../../../components/FullError'
 

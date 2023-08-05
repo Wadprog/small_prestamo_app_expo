@@ -13,5 +13,5 @@ export default {
   my_1: {
     marginVertical: 15,
   },
-  input: tw`bg-white text-secondary placeholder:text-secondary font-semibold rounded input-secondary border-none invalid:text-red-500 autofill:text-secondary autofill:bg-blue-200`,
+  input: tw`bg-white text-base-100 placeholder:text-base-100 font-semibold rounded  border-0 invalid:text-red-500 autofill:text-base-100 autofill:bg-blue-200`,
 };

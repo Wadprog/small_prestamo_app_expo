@@ -6,7 +6,7 @@ import { useStripe } from '@stripe/stripe-react-native'
 import RequestPayment from './components/RequestPayment'
 import PaymentSuccesful from './components/PaymentSuccesful'
 
-import Screen from '../../components/screen/Screen'
+import Screen from '../../components/screen'
 import {
   makePaymentIntent,
   getPaymentIntent,

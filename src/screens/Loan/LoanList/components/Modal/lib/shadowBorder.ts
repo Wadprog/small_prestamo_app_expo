@@ -8,7 +8,7 @@ export default (selected: boolean) => ({
     width: 0,
     height: 3,
   },
-  shadowOpacity: 0.27,
+  shadowOpacity: 0.10,
   shadowRadius: 4.65,
 
   elevation: 10,

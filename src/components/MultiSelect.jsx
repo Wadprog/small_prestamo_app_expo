@@ -40,7 +40,7 @@ export default function MultiSelect({
   return (
     <View
       style={[
-        tw`bg-blue-200 text-secondary placeholder:text-secondary font-semibold rounded-full input-secondary border-none invalid:text-red-500 autofill:text-secondary autofill:bg-blue-200 p-5`,
+        tw`bg-blue-200 font-semibold rounded-full  invalid:text-red-500 autofill autofill:bg-blue-200 p-5`,
         containerStyle,
       ]}
       {...otherProps}

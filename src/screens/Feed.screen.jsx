@@ -10,7 +10,7 @@ import tw from 'tailwind-react-native-classnames'
 import { Field, Form, Submit } from '../components/form'
 import BTN from '../components/Button'
 
-import Screen from '../components/screen/Screen'
+import Screen from '../components/screen'
 
 // Components
 

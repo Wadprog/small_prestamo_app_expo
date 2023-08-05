@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 import tw from '../lib/tailwind'
 import { image } from '../config'
 import Button from '../components/Button'
-import Screen from '../components/screen/Screen'
+import Screen from '../components/screen'
 import { Form, Field, Submit } from '../components/form'
 
 import { getCurrentUser, login } from '../store/registration'
@@ -24,7 +24,12 @@ const LoginScreen = ({ navigation }) => {
   const { loading, error } = useSelector(getCurrentUser)
 
   const handleSubmit = (values) => {
-    dispatch(login(values))
+    values.strategy = 'local'
+    try {
+      dispatch(login(values))
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
@@ -48,13 +53,12 @@ const LoginScreen = ({ navigation }) => {
                 required
                 autoCapitalize="none"
                 placeholder="Username@Company"
-                name="email"
+                name="username"
                 type="email"
               />
               <Field
                 required
                 autoCapitalize="none"
-                autoCorrect="false"
                 placeholder="Password"
                 name="password"
                 showPassword

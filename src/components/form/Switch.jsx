@@ -5,7 +5,7 @@ import Checkbox from 'expo-checkbox'
 
 import Error from './Error'
 
-function FormSwitch({ name, value, ...otherProps }) {
+function FormSwitch({ name, ...otherProps }) {
   const { touched, errors, values, setFieldValue } = useFormikContext()
 
   return (
@@ -26,7 +26,6 @@ function FormSwitch({ name, value, ...otherProps }) {
 
 FormSwitch.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
   otherProps: PropTypes.object,
 }
 export default FormSwitch

@@ -4,15 +4,15 @@ import { View } from 'react-native'
 import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 // Custom dependencies
-import tw from '../../lib/tailwind'
-import Text from '../../components/Text'
-import PaymentPlan from '../../components/PaymentPlan'
-import ActivityIndicator from '../../components/LoadIndicator'
-import Error from '../../components/FullError'
-import ListItemPicker from '../../components/ItemPicker/ListItemPicker'
-import { Form, Submit, Toggle } from '../../components/form'
+import tw from '../../../lib/tailwind'
+import Text from '../../../components/Text'
+import PaymentPlan from '../../../components/PaymentPlan'
+import ActivityIndicator from '../../../components/LoadIndicator'
+import Error from '../../../components/FullError'
+import ListItemPicker from '../../../components/ItemPicker/ListItemPicker'
+import { Form, Submit, Toggle } from '../../../components/form'
 
-import { RequestPlans, getPlans } from '../../store/plans'
+import { RequestPlans, getPlans } from '../../../store/plans'
 
 const initialValues = {
   plan: '',

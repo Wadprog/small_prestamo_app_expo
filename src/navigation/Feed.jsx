@@ -17,7 +17,7 @@ const TimelineNavigator = () => (
       // headerShadowVisible: false,
     }}
   >
-    <Stack.Screen name="My Feeds" component={LoanListScreen} />
+    <Stack.Screen name="LoanList" component={LoanListScreen} />
     <Stack.Screen name="AddLoans" component={LoanAddScreen} />
     <Stack.Screen name="AddLoanRequests" component={LoanRequestScreen} />
   </Stack.Navigator>

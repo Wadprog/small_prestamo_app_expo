@@ -15,7 +15,6 @@ function AppText({ children, style, custom = false, ...otherProps }) {
 }
 AppText.propTypes = {
   children: PropTypes.node.isRequired,
-  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   custom: PropTypes.bool,
 }
 

@@ -12,9 +12,16 @@ const FullError = ({
   onReload,
   secondLine = true,
   secondlIneMessage,
+  reloadMsg = 'Reload',
+  style = {},
 }) => {
   return (
-    <View style={tw` w-full  h-full justify-center items-center  rounded-2xl`}>
+    <View
+      style={tw.style(
+        `w-full  h-full justify-center items-center  rounded-2xl`,
+        style
+      )}
+    >
       <MaterialCommunityIcons
         name="emoticon-sad-outline"
         size={78}
@@ -23,7 +30,7 @@ const FullError = ({
       <Text category="h6">{errorMsg || "It's seems there is an error"} </Text>
       {secondLine && <Text>{secondlIneMessage || defaultSecondLine}</Text>}
       {onReload && (
-        <Button appearance="ghost" title="Realod" onPress={onReload} />
+        <Button appearance="ghost" title={reloadMsg} onPress={onReload} />
       )}
     </View>
   )

@@ -48,7 +48,7 @@ function SettingSwitch({
   return (
     <View
       style={[
-        tw`flex bg-white flex-row justify-between px-2 py-3 mx-1`,
+        tw`flex bg-white flex-row justify-between px-2 py-3`,
         contentContainerStyle,
       ]}
     >

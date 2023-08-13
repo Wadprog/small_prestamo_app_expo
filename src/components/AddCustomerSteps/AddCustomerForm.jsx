@@ -1,50 +1,50 @@
-import React from 'react'
-import * as Yup from 'yup'
-import { View } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
+import React from "react";
+import * as Yup from "yup";
+import { View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 
-import tw from '../../lib/tailwind'
-import { Form, Field, ImageField, Submit, Select } from '../form'
-import LoadIndicator from '../TransparentLoader'
+import tw from "../../lib/tailwind";
+import { Form, Field, ImageField, Submit, Select } from "../form";
+import LoadIndicator from "../TransparentLoader";
 
-import { CreateBorrower, getBorrowers } from '../../store/borrowers'
+import { CreateBorrower, getBorrowers } from "../../store/borrowers";
 
 const ValidationSchema = Yup.object().shape({
-  phone: Yup.string().required().min(10).label('Phone'),
-  profilePicture: Yup.string().label('Profile Picture'),
-  given_name: Yup.string().required().min(3).label('First Name'),
-  familly_name: Yup.string().required().min(3).label('Last Name'),
-  email: Yup.string().required().min(6).email().label('Email'),
-  idType: Yup.string().label('Id Type'),
-  idNumber: Yup.string().label('Id Number'),
-})
+  phone: Yup.string().required().min(10).label("Phone"),
+  profilePicture: Yup.string().label("Profile Picture"),
+  given_name: Yup.string().required().min(3).label("First Name"),
+  familly_name: Yup.string().required().min(3).label("Last Name"),
+  email: Yup.string().required().min(6).email().label("Email"),
+  idType: Yup.string().label("Id Type"),
+  idNumber: Yup.string().label("Id Number"),
+});
 
 const initialValues = {
-  phone: '',
-  profilePicture: '',
-  given_name: '',
-  familly_name: '',
-  email: '',
-  idType: '',
-}
+  phone: "",
+  profilePicture: "",
+  given_name: "",
+  familly_name: "",
+  email: "",
+  idType: "",
+};
 
 const AddCustomerForm = ({ handleSubmit, formValues }) => {
-  const idtypes = ['passport', 'nationalId', 'driverLicense']
-  const dispatch = useDispatch()
-  const { current_borrower, loading, error } = useSelector(getBorrowers)
+  const idtypes = ["passport", "nationalId", "driverLicense"];
+  const dispatch = useDispatch();
+  const { current_borrower, loading, error } = useSelector(getBorrowers);
 
   const handleFormSubmit = async (values) => {
-    dispatch(CreateBorrower(values))
-  }
+    dispatch(CreateBorrower(values));
+  };
   React.useEffect(() => {
     if (current_borrower && !loading && !error) {
-      handleSubmit({ borrower: current_borrower.id })
+      handleSubmit({ borrower: current_borrower.id });
     }
     return () => {
-      console.log('clearing the current borrower')
+      console.log("clearing the current borrower");
       //dispatch({ type: 'CLEAR_CURRENT_BORROWER' })
-    }
-  }, [current_borrower, loading, error])
+    };
+  }, [current_borrower, loading, error]);
   return (
     <>
       {loading ? (
@@ -113,7 +113,7 @@ const AddCustomerForm = ({ handleSubmit, formValues }) => {
         </Form>
       )}
     </>
-  )
-}
+  );
+};
 
-export default AddCustomerForm
+export default AddCustomerForm;

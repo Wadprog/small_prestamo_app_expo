@@ -1,39 +1,39 @@
-import { View } from 'react-native'
-import React from 'react'
-import * as Yup from 'yup'
-import { useDispatch, useSelector } from 'react-redux'
+import { View } from "react-native";
+import React from "react";
+import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
 
-import tw from '../lib/tailwind'
-import { Form, Field, Submit } from './form'
-import LoadIndicator from './TransparentLoader'
+import tw from "../lib/tailwind";
+import { Form, Field, Submit } from "./form";
+import LoadIndicator from "./TransparentLoader";
 
-import { CreateloanRequest, getloanRequests } from '../store/loanRequests'
+import { CreateloanRequest, getloanRequests } from "../store/loanRequests";
 
 const ValidationSchema = Yup.object().shape({
-  request_amount: Yup.number().required().label('Loan Amount'),
-})
+  request_amount: Yup.number().required().label("Loan Amount"),
+});
 
 const initialValues = {
-  request_amount: '',
-}
+  request_amount: "",
+};
 
 const LoanRequestForm = ({ handleSubmit, formValues, previousForm }) => {
-  const dispatch = useDispatch()
-  const res = useSelector(getloanRequests)
-  const { last_request, loading, error } = res
+  const dispatch = useDispatch();
+  const res = useSelector(getloanRequests);
+  const { last_request, loading, error } = res;
 
   const handleFormSubmit = async (values) => {
-    await dispatch(CreateloanRequest({ ...values, ...previousForm }))
-  }
+    await dispatch(CreateloanRequest({ ...values, ...previousForm }));
+  };
 
   React.useEffect(() => {
     if (last_request && !loading && !error) {
-      handleSubmit({ loan_request_id: last_request.id })
+      handleSubmit({ loan_request_id: last_request.id });
     }
     return () => {
-      console.log('clearing the current loan_request')
-    }
-  }, [last_request, loading, error])
+      console.log("clearing the current loan_request");
+    };
+  }, [last_request, loading, error]);
 
   return (
     <>
@@ -61,7 +61,7 @@ const LoanRequestForm = ({ handleSubmit, formValues, previousForm }) => {
         </Form>
       )}
     </>
-  )
-}
+  );
+};
 
-export default LoanRequestForm
+export default LoanRequestForm;

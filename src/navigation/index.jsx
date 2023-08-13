@@ -1,31 +1,31 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-import { NavigationContainer } from '@react-navigation/native'
-import AppNavigation from './Drawer'
-import AuthNavigator from './Auth.navigation'
-import PaymentNavigator from './Payment.navigation'
+import { NavigationContainer } from "@react-navigation/native";
+import AppNavigation from "./Drawer";
+import AuthNavigator from "./Auth.navigation";
+import PaymentNavigator from "./Payment.navigation";
 
-import { getCurrentUser } from '../store/auth'
+import { getCurrentUser } from "../store/auth";
 
 // import AppTheme from './theme'
-import { get } from '../lib/cache'
-import { logged } from '../store/auth'
+import { get } from "../lib/cache";
+import { logged } from "../store/auth";
 
 function Routes() {
-  const auth = useSelector(getCurrentUser)
+  const auth = useSelector(getCurrentUser);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const restoreUser = async () => {
-    const user = await get('user')
+    const user = await get("user");
 
-    if (!user) return
-    dispatch({ type: logged, payload: { user } })
-  }
+    if (!user) return;
+    dispatch({ type: logged, payload: { user } });
+  };
 
   useEffect(() => {
-    restoreUser()
-  }, [])
+    restoreUser();
+  }, []);
   return (
     <NavigationContainer>
       {!auth.user ? (
@@ -37,7 +37,7 @@ function Routes() {
       )}
       {/* {!auth.user ? <AuthNavigator /> : <AppNavigation />} */}
     </NavigationContainer>
-  )
+  );
 }
 
-export default Routes
+export default Routes;

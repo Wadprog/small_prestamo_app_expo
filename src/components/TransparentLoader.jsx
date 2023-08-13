@@ -1,8 +1,8 @@
-import { View, ActivityIndicator } from 'react-native'
-import React from 'react'
+import { View, ActivityIndicator } from "react-native";
+import React from "react";
 
-import tw from '../lib/tailwind'
-import Text from './Text'
+import tw from "../lib/tailwind";
+import Text from "./Text";
 
 const TransparentLoader = ({ message }) => {
   return (
@@ -11,10 +11,10 @@ const TransparentLoader = ({ message }) => {
     >
       <ActivityIndicator size="large" color="#fff" />
       <Text style={tw`text-white font-bold text-center text-2xl`}>
-        {message || 'Loading...'}
+        {message || "Loading..."}
       </Text>
     </View>
-  )
-}
+  );
+};
 
-export default TransparentLoader
+export default TransparentLoader;

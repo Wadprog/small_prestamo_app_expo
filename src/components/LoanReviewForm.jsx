@@ -1,46 +1,46 @@
-import { View } from 'react-native'
-import React from 'react'
-import * as Yup from 'yup'
-import { useDispatch, useSelector } from 'react-redux'
+import { View } from "react-native";
+import React from "react";
+import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
 
-import tw from '../lib/tailwind'
-import { Form, Field, Submit, Select } from './form'
+import tw from "../lib/tailwind";
+import { Form, Field, Submit, Select } from "./form";
 
-import { createloanReview, loanReviews } from '../store/loanReviews'
-import LoadIndicator from './TransparentLoader'
+import { createloanReview, loanReviews } from "../store/loanReviews";
+import LoadIndicator from "./TransparentLoader";
 
 const ValidationSchema = Yup.object().shape({
   // plan_id: Yup.number().label('Plan'),
-  proposed_amount: Yup.number().required().label('Proposed Amount'),
-})
+  proposed_amount: Yup.number().required().label("Proposed Amount"),
+});
 
 const initialValues = {
   // plan_id: '',
-  proposed_amount: '',
-}
+  proposed_amount: "",
+};
 
 const LoanReviewForm = ({ handleSubmit, formValues, previousForm }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const { last_review, loading, error } = useSelector(loanReviews)
+  const { last_review, loading, error } = useSelector(loanReviews);
 
   const handleFormSubmit = async (values) => {
-    console.log('values', values)
-    await dispatch(createloanReview({ ...values, ...previousForm }))
-    console.log('After dispatch')
-  }
+    console.log("values", values);
+    await dispatch(createloanReview({ ...values, ...previousForm }));
+    console.log("After dispatch");
+  };
 
   React.useEffect(() => {
     if (last_review && !loading && !error) {
       handleSubmit({
         last_review: last_review.id,
         plan_id: last_review.plan_id,
-      })
+      });
     }
     return () => {
-      console.log('clearing the current loan_review')
-    }
-  }, [last_review, loading, error])
+      console.log("clearing the current loan_review");
+    };
+  }, [last_review, loading, error]);
 
   return (
     <>
@@ -70,7 +70,7 @@ const LoanReviewForm = ({ handleSubmit, formValues, previousForm }) => {
         </Form>
       )}
     </>
-  )
-}
+  );
+};
 
-export default LoanReviewForm
+export default LoanReviewForm;

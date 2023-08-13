@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import tw from '../../lib/tailwind'
 import { Form, Field, ImageField, Submit, Select } from '../form'
+import LoadIndicator from '../TransparentLoader'
 
 import { CreateBorrower, getBorrowers } from '../../store/borrowers'
 
@@ -45,67 +46,73 @@ const AddCustomerForm = ({ handleSubmit, formValues }) => {
     }
   }, [current_borrower, loading, error])
   return (
-    <Form
-      validationSchema={ValidationSchema}
-      initialValues={formValues || initialValues}
-      onSubmit={handleFormSubmit}
-    >
-      <View style={tw`flex h-[100%]`}>
-        <View style={tw`h-[80%]`}>
-          <View style={tw`flex flex-row justify-between `}>
-            <ImageField name="profilePricture" />
-            <View style={tw`flex-1 ml-3 rounded-xl`}>
+    <>
+      {loading ? (
+        <LoadIndicator />
+      ) : (
+        <Form
+          validationSchema={ValidationSchema}
+          initialValues={formValues || initialValues}
+          onSubmit={handleFormSubmit}
+        >
+          <View style={tw`flex h-[100%]`}>
+            <View style={tw`h-[80%]`}>
+              <View style={tw`flex flex-row justify-between `}>
+                <ImageField name="profilePricture" />
+                <View style={tw`flex-1 ml-3 rounded-xl`}>
+                  <Field
+                    required
+                    placeholder="First Name"
+                    name="given_name"
+                    type="text"
+                    style={tw`mr-1 `}
+                  />
+                  <Field
+                    required
+                    placeholder="Last Name"
+                    name="familly_name"
+                    type="text"
+                    style={tw``}
+                  />
+                </View>
+              </View>
+
               <Field
                 required
-                placeholder="First Name"
-                name="given_name"
-                type="text"
-                style={tw`mr-1 `}
+                autoCapitalize="none"
+                placeholder="Email"
+                name="email"
+                type="email"
+                autoCorrect={false}
               />
               <Field
                 required
-                placeholder="Last Name"
-                name="familly_name"
+                autoCapitalize="none"
+                placeholder="Phone"
+                name="phone"
                 type="text"
-                style={tw``}
+                autoCorrect={false}
               />
+              <View style={tw`flex flex-row justify-between items-center  `}>
+                <Select name="idType" placeholder="Id Type" items={idtypes} />
+                <Field
+                  required
+                  autoCapitalize="none"
+                  placeholder="Id Number"
+                  name="idNumber"
+                  type="text"
+                  autoCorrect={false}
+                  style={tw`ml-1 flex-1`}
+                />
+              </View>
+            </View>
+            <View style={tw`bg-blue-500 mb-5`}>
+              <Submit title="Next" />
             </View>
           </View>
-
-          <Field
-            required
-            autoCapitalize="none"
-            placeholder="Email"
-            name="email"
-            type="email"
-            autoCorrect={false}
-          />
-          <Field
-            required
-            autoCapitalize="none"
-            placeholder="Phone"
-            name="phone"
-            type="text"
-            autoCorrect={false}
-          />
-          <View style={tw`flex flex-row justify-between items-center  `}>
-            <Select name="idType" placeholder="Id Type" items={idtypes} />
-            <Field
-              required
-              autoCapitalize="none"
-              placeholder="Id Number"
-              name="idNumber"
-              type="text"
-              autoCorrect={false}
-              style={tw`ml-1 flex-1`}
-            />
-          </View>
-        </View>
-        <View style={tw`bg-blue-500 mb-5`}>
-          <Submit title="Next" />
-        </View>
-      </View>
-    </Form>
+        </Form>
+      )}
+    </>
   )
 }
 

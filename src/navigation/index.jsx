@@ -18,7 +18,7 @@ function Routes() {
   const dispatch = useDispatch()
   const restoreUser = async () => {
     const user = await get('user')
-    console.log('user', user)
+
     if (!user) return
     dispatch({ type: logged, payload: { user } })
   }

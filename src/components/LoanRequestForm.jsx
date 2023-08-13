@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import tw from '../lib/tailwind'
 import { Form, Field, Submit } from './form'
+import LoadIndicator from './TransparentLoader'
 
 import { CreateloanRequest, getloanRequests } from '../store/loanRequests'
 
@@ -23,7 +24,6 @@ const LoanRequestForm = ({ handleSubmit, formValues, previousForm }) => {
 
   const handleFormSubmit = async (values) => {
     await dispatch(CreateloanRequest({ ...values, ...previousForm }))
-  
   }
 
   React.useEffect(() => {
@@ -32,30 +32,35 @@ const LoanRequestForm = ({ handleSubmit, formValues, previousForm }) => {
     }
     return () => {
       console.log('clearing the current loan_request')
-    
     }
   }, [last_request, loading, error])
 
   return (
-    <Form
-      validationSchema={ValidationSchema}
-      initialValues={formValues || initialValues}
-      onSubmit={handleFormSubmit}
-    >
-      <View style={tw`flex h-[100%]`}>
-        <View style={tw`h-[80%]`}>
-          <Field
-            required
-            placeholder="Request Amount"
-            name="request_amount"
-            type="number"
-          />
-        </View>
-        <View style={tw`bg-blue-500 mb-5`}>
-          <Submit title="Next" />
-        </View>
-      </View>
-    </Form>
+    <>
+      {loading ? (
+        <LoadIndicator />
+      ) : (
+        <Form
+          validationSchema={ValidationSchema}
+          initialValues={formValues || initialValues}
+          onSubmit={handleFormSubmit}
+        >
+          <View style={tw`flex h-[100%]`}>
+            <View style={tw`h-[80%]`}>
+              <Field
+                required
+                placeholder="Request Amount"
+                name="request_amount"
+                type="number"
+              />
+            </View>
+            <View style={tw`bg-blue-500 mb-5`}>
+              <Submit title="Next" />
+            </View>
+          </View>
+        </Form>
+      )}
+    </>
   )
 }
 

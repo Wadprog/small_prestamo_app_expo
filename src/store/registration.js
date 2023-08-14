@@ -5,7 +5,8 @@ import { createSlice } from '@reduxjs/toolkit'
 import * as action from './api'
 import { endpoints } from '../config'
 import { setHeader } from '../middleware/api'
-import { store } from '../lib/cache'
+
+import * as storage from '../lib/secureCache'
 const url = endpoints.REGISTER
 
 const initialState = {
@@ -23,16 +24,22 @@ export const Auth = createSlice({
     loginRequested: (state) => {
       state.loading = true
     },
-    loginSucceed: (state, action) => {
-      state.token = action.payload.accessToken
-      setHeader('authorization', action.payload.accessToken)
-      state.loading = false
-      state.user = action.payload.Person
-      store('user', {
+    loginSucceed: async (state, action) => {
+      try {
+        storage.store('user', 'userdata')
+        setHeader('authorization', action.payload.accessToken)
+        state.token = action.payload.accessToken
+        state.loading = false
+        state.user = action.payload.Person
+
+        /*{
         Person: action.payload.Person,
         accessToken: action.payload.accessToken,
-      })
-      state.lastFetch = Date.now()
+      }*/
+        state.lastFetch = Date.now()
+      } catch (error) {
+        console.log(error)
+      }
     },
     getAccountRequested: (state) => {
       state.loading = true
@@ -130,5 +137,5 @@ export const UpdateUser = (changes) => (dispatch) => {
 export const logout = () => (dispatch) => dispatch(Auth.actions.LogOut())
 
 export const getCurrentUser = (state) => state.authentication
-export const logged = Auth.actions.loginSucceed.type
+export const logged = () => (dispatch) => dispatch(Auth.actions.loginSucceed())
 export default Auth.reducer

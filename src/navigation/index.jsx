@@ -9,18 +9,24 @@ import PaymentNavigator from './Payment.navigation'
 import { getCurrentUser } from '../store/auth'
 
 // import AppTheme from './theme'
-import { get } from '../lib/cache'
-import { logged } from '../store/auth'
+import { get } from '../lib/secureCache'
+import { logged, Login } from '../store/auth'
 
 function Routes() {
   const auth = useSelector(getCurrentUser)
-
   const dispatch = useDispatch()
-  const restoreUser = async () => {
-    const user = await get('user')
 
-    if (!user) return
-    dispatch({ type: logged, payload: { user } })
+  const restoreUser = async () => {
+    const { user, token } = auth
+    if (user && token) return
+    const storedUser = await get('user')
+    if (!storedUser) {
+      // const credential = await get('credential')
+      // if (!credential) return
+      // dispatch({ type: Login(credential) })
+      return
+    }
+    dispatch({ type: logged, payload: storedUser })
   }
 
   useEffect(() => {

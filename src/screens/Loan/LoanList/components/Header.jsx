@@ -23,19 +23,10 @@ const Header = ({ onFileterBtnPress, onFilter }) => {
       <View style={tw`  flex flex-row justify-between items-center `}>
         <TextButton
           title="Add Loan"
-          appearance="outlined"
           onPress={() => navigation.navigate('AddLoans')}
         />
-        <TextButton
-          title="Add Loan Request"
-          appearance="outlined"
-          onPress={console.log}
-        />
-        <TextButton
-          title="Pay Loan"
-          appearance="outlined"
-          onPress={console.log}
-        />
+        <TextButton title="Add Loan Request" onPress={console.log} />
+        <TextButton title="Pay Loan" onPress={console.log} />
       </View>
     </View>
   )

@@ -4,11 +4,11 @@ import { createSlice } from '@reduxjs/toolkit'
 import { endpoints } from '../config'
 import * as action from './api'
 import { setHeader } from '../middleware/api'
+import { store, remove } from '../lib/secureCache'
+import { Alert } from 'react-native'
 
 const url = endpoints.LOG_IN
 const registerUrl = endpoints.REGISTER
-// const { EXPECTED_HEADER } = endpoints
-const { log, table } = console
 
 const initialState = {
   loading: false,
@@ -18,6 +18,7 @@ const initialState = {
   error: null,
 }
 
+const key = 'user'
 export const Auth = createSlice({
   name: 'authentication',
   initialState,
@@ -26,13 +27,22 @@ export const Auth = createSlice({
       state.loading = true
     },
     loginSucceed: (state, action) => {
-      console.log({ action })
+      const { accessToken, employee } = action.payload
       state.loading = false
-      state.token = action.payload.accessToken
-      setHeader('authorization', action.payload.accessToken)
-      state.user = action.payload.employee
+      state.token = accessToken
+      store(key, { employee, accessToken })
+      setHeader('authorization', accessToken)
+      state.user = employee
       state.lastFetch = Date.now()
-      // storage.set('auth', action.payload.token)
+    },
+
+    logged: (state, action) => {
+      const { accessToken, employee } = action.payload
+      setHeader('authorization', accessToken)
+      state.loading = false
+      state.token = accessToken
+      state.user = employee
+      state.lastFetch = Date.now()
     },
 
     LoginFailed: (state, action) => {
@@ -44,7 +54,7 @@ export const Auth = createSlice({
       state.loading = false
       state.token = null
       state.user = null
-      // storage.remove('auth')
+      remove(key)
     },
     updateRequested: (state) => {
       state.loading = true
@@ -62,8 +72,6 @@ export const Auth = createSlice({
 })
 
 export const Register = (newUser) => (dispatch) => {
-  log('Register')
-  log({ newUser })
   dispatch(
     action.apiCallBegan({
       url: registerUrl,
@@ -75,12 +83,11 @@ export const Register = (newUser) => (dispatch) => {
     })
   )
 }
-export const Login = (credentials) => (dispatch) => {
-  // const { lastFetch } = getState().authentication
-  // if (lastFetch) {
-  //   const diff = moment().diff(moment(lastFetch), 'minutes')
-  //   if (diff < env.requestRateInMinutes && user !== null) return
-  // }
+export const Login = (credentials) => (dispatch, getState) => {
+  const { user, token } = getState().authentication
+  if (user && token) {
+    Alert.alert('You are already logged in')
+  }
 
   dispatch(
     action.apiCallBegan({
@@ -107,5 +114,5 @@ export const UpdateUser = (changes) => (dispatch) => {
 }
 export const logout = () => (dispatch) => dispatch(Auth.actions.LogOut())
 export const getCurrentUser = (state) => state.authentication
-export const logged = Auth.actions.loginSucceed.type
+export const logged = Auth.actions.logged.type
 export default Auth.reducer

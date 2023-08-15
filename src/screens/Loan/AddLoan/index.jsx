@@ -12,15 +12,13 @@ import { CreateLoan, getLoans } from '../../../store/loans'
 import CreateCustomerAddLoanSteps from '../../../components/CreateCustomerAddLoan'
 import SelectCustomerAddLoanSteps from '../../../components/SelectCustomerAddLoan'
 
-import FlowOption from './components/FlowOption'
+import FlowOption from '../../../components/FlowOption'
 
 const AddLoan = ({ navigation }) => {
   const dispatch = useDispatch()
   const { loading, error } = useSelector(getLoans)
 
   const handleSubmit = (data) => {
-    console.log('\n*****All steps finished!*****\n\n')
-    console.log({ data })
     dispatch(CreateLoan({ ...data, accepted_loan_review_id: data.last_review }))
     if (!error && !loading) navigation.navigate('LoanList')
   }

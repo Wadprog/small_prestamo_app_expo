@@ -1,8 +1,8 @@
 import { TouchableOpacity } from 'react-native'
 import React from 'react'
 
-import tw from '../../../../lib/tailwind'
-import Text from '../../../../components/Text'
+import tw from '../lib/tailwind'
+import Text from './Text'
 
 const FlowOption = ({ onPress, text }) => {
   return (

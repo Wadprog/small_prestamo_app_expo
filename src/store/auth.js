@@ -113,6 +113,8 @@ export const UpdateUser = (changes) => (dispatch) => {
   )
 }
 export const logout = () => (dispatch) => dispatch(Auth.actions.LogOut())
-export const getCurrentUser = (state) => state.authentication
+export const getCurrentUser = (state) => {
+  return state.authentication
+}
 export const logged = Auth.actions.logged.type
 export default Auth.reducer

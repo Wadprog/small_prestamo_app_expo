@@ -5,13 +5,21 @@ import { FlatList } from 'react-native'
 import { useFormikContext } from 'formik'
 import tw from '../../lib/tailwind'
 
-const ItemPicker = ({ data, Component, name, period, ...otherProps }) => {
+const ItemPicker = ({
+  data,
+  Component,
+  name,
+  flatListOptions = {},
+  ...otherProps
+}) => {
+  console.log('data', data)
+  console.log('Component', Component)
   const { setFieldValue, values } = useFormikContext()
   const handleSelect = (item) => {
     setFieldValue(name, item.id)
   }
   return (
-    data  && (
+    data && (
       <FlatList
         horizontal
         data={data}
@@ -20,11 +28,11 @@ const ItemPicker = ({ data, Component, name, period, ...otherProps }) => {
             key={item.id}
             selected={item.id === values[name]}
             {...item}
-            period={period}
             onMainPress={() => handleSelect(item)}
             {...otherProps}
           />
         )}
+        {...flatListOptions}
       />
     )
   )

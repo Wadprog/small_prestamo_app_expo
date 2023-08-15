@@ -4,25 +4,37 @@ import * as Yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 
 import tw from '../lib/tailwind'
-import { Form, Field, Submit, Select } from './form'
+import LoanPlan from './LoanPlan'
+import { Form, Field, Submit } from './form'
+import ListItemPicker from './ItemPicker/ListItemPicker'
+import Text from './Text'
 
+import { requestLoanPlans, getLoanPlans } from '../store/loanPlans'
 import { createloanReview, loanReviews } from '../store/loanReviews'
 import LoadIndicator from './TransparentLoader'
 
 const ValidationSchema = Yup.object().shape({
-  // plan_id: Yup.number().label('Plan'),
+  loan_plan_id: Yup.number().label('Loan Plan'),
   proposed_amount: Yup.number().required().label('Proposed Amount'),
 })
 
 const initialValues = {
-  // plan_id: '',
+  loan_plan_id: '',
   proposed_amount: '',
 }
 
 const LoanReviewForm = ({ handleSubmit, formValues, previousForm }) => {
   const dispatch = useDispatch()
-
   const { last_review, loading, error } = useSelector(loanReviews)
+  const {
+    data: loanPlans,
+    loading: loanPlanIsLoading,
+    // error: loanPlanError,
+  } = useSelector(getLoanPlans)
+
+  React.useEffect(() => {
+    dispatch(requestLoanPlans())
+  }, [])
 
   const handleFormSubmit = async (values) => {
     console.log('values', values)
@@ -34,7 +46,7 @@ const LoanReviewForm = ({ handleSubmit, formValues, previousForm }) => {
     if (last_review && !loading && !error) {
       handleSubmit({
         last_review: last_review.id,
-        plan_id: last_review.plan_id,
+        loan_plan_id: last_review.loan_plan_id,
       })
     }
     return () => {
@@ -44,7 +56,7 @@ const LoanReviewForm = ({ handleSubmit, formValues, previousForm }) => {
 
   return (
     <>
-      {loading ? (
+      {loading || loanPlanIsLoading ? (
         <LoadIndicator />
       ) : (
         <Form
@@ -56,12 +68,16 @@ const LoanReviewForm = ({ handleSubmit, formValues, previousForm }) => {
             <View style={tw`h-[80%]`}>
               <Field
                 required
-                placeholder="Request Amount"
+                placeholder="Proposed Amount"
                 name="proposed_amount"
                 type="number"
               />
 
-              <Select name="plan_id" label="Plan" items={[1, 2, 3]} />
+              <ListItemPicker
+                name="loan_plan_id"
+                Component={LoanPlan}
+                data={loanPlans.data}
+              />
             </View>
             <View style={tw`bg-blue-500 mb-5`}>
               <Submit title="Next" />

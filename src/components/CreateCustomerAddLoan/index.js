@@ -12,11 +12,11 @@ import { clearLastBorrower } from '../../store/borrowers'
 import { clearLastRequest } from '../../store/loanRequests'
 
 const steps = [
-  { 
-    name: 'borrower' ,
+  {
+    name: 'borrower',
     label: "Personal's info",
-   component: AddCustomerForm, 
-   },
+    component: AddCustomerForm,
+  },
   {
     name: 'loanRequest',
     label: 'Loan Request',
@@ -26,18 +26,17 @@ const steps = [
     name: 'loanReview',
     label: 'Loan Review',
     component: LoanReviewForm,
-  }
+  },
 ]
 
 const CreateCustomerAddLoanSteps = ({ onFinish, onError, onLoading }) => {
   const dispatch = useDispatch()
 
   React.useEffect(() => {
-  return ()=>{
-  dispatch(clearLastReview())
-  dispatch(clearLastRequest())
-  dispatch(clearLastBorrower())
-}
+    console.log('clearing')
+    dispatch(clearLastReview())
+    dispatch(clearLastRequest())
+    dispatch(clearLastBorrower())
   }, [dispatch])
 
   return (

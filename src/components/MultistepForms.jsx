@@ -39,6 +39,12 @@ const MultistepForms = ({
   const [currentPosition, setCurrentPosition] = React.useState(0)
   const Step = steps[currentPosition].component
 
+  React.useEffect(() => {
+    return () => {
+      formsData = {}
+    }
+  }, [])
+
   return (
     <View style={tw`m-0 flex h-full`}>
       <View style={tw`flex-1`}>

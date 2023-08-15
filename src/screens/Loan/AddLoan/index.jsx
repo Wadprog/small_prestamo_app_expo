@@ -19,7 +19,9 @@ const AddLoan = ({ navigation }) => {
   const { loading, error } = useSelector(getLoans)
 
   const handleSubmit = (data) => {
-    dispatch(CreateLoan(data))
+    console.log('\n*****All steps finished!*****\n\n')
+    console.log({ data })
+    dispatch(CreateLoan({ ...data, accepted_loan_review_id: data.last_review }))
     if (!error && !loading) navigation.navigate('LoanList')
   }
   const [flow, setFlow] = React.useState(0)

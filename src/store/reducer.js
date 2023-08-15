@@ -3,6 +3,7 @@ import { combineReducers } from 'redux'
 import plan from './plans'
 import loan from './loans'
 import idType from './idTypes'
+import loanplan from './loanPlans'
 import borrower from './borrowers'
 import authentication from './auth'
 import loanReview from './loanReviews'
@@ -13,6 +14,7 @@ export default combineReducers({
   plan,
   loan,
   idType,
+  loanplan,
   borrower,
   loanReview,
   loanrequest,

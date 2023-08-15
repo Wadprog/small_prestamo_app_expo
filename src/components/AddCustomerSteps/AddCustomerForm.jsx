@@ -4,8 +4,11 @@ import { View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 
 import tw from '../../lib/tailwind'
-import { Form, Field, ImageField, Submit, Select } from '../form'
+import text from '../../config/text'
+
+import InfoBox from '../InfoBox'
 import LoadIndicator from '../TransparentLoader'
+import { Form, Field, ImageField, Submit, Select } from '../form'
 
 import { CreateBorrower, getBorrowers } from '../../store/borrowers'
 
@@ -40,77 +43,76 @@ const AddCustomerForm = ({ handleSubmit, formValues }) => {
     if (current_borrower && !loading && !error) {
       handleSubmit({ borrower: current_borrower.id })
     }
-    return () => {
-      console.log('clearing the current borrower')
-      //dispatch({ type: 'CLEAR_CURRENT_BORROWER' })
-    }
   }, [current_borrower, loading, error])
   return (
     <>
       {loading ? (
         <LoadIndicator />
       ) : (
-        <Form
-          validationSchema={ValidationSchema}
-          initialValues={formValues || initialValues}
-          onSubmit={handleFormSubmit}
-        >
-          <View style={tw`flex h-[100%]`}>
-            <View style={tw`h-[80%]`}>
-              <View style={tw`flex flex-row justify-between `}>
-                <ImageField name="profilePricture" />
-                <View style={tw`flex-1 ml-3 rounded-xl`}>
-                  <Field
-                    required
-                    placeholder="First Name"
-                    name="given_name"
-                    type="text"
-                    style={tw`mr-1 `}
-                  />
-                  <Field
-                    required
-                    placeholder="Last Name"
-                    name="familly_name"
-                    type="text"
-                    style={tw``}
-                  />
+        <>
+          <InfoBox description={text.addCustomerForm.infoBox} />
+          <Form
+            validationSchema={ValidationSchema}
+            initialValues={formValues || initialValues}
+            onSubmit={handleFormSubmit}
+          >
+            <View style={tw`flex h-[80%]`}>
+              <View style={tw`h-[80%]`}>
+                <View style={tw`flex flex-row justify-between `}>
+                  <ImageField name="profilePricture" />
+                  <View style={tw`flex-1 ml-3 rounded-xl`}>
+                    <Field
+                      required
+                      placeholder="First Name"
+                      name="given_name"
+                      type="text"
+                      style={tw`mr-1 `}
+                    />
+                    <Field
+                      required
+                      placeholder="Last Name"
+                      name="familly_name"
+                      type="text"
+                      style={tw``}
+                    />
+                  </View>
                 </View>
-              </View>
 
-              <Field
-                required
-                autoCapitalize="none"
-                placeholder="Email"
-                name="email"
-                type="email"
-                autoCorrect={false}
-              />
-              <Field
-                required
-                autoCapitalize="none"
-                placeholder="Phone"
-                name="phone"
-                type="text"
-                autoCorrect={false}
-              />
-              <View style={tw`flex flex-row justify-between items-center  `}>
-                <Select name="idType" placeholder="Id Type" items={idtypes} />
                 <Field
                   required
                   autoCapitalize="none"
-                  placeholder="Id Number"
-                  name="idNumber"
+                  placeholder="Email"
+                  name="email"
+                  type="email"
+                  autoCorrect={false}
+                />
+                <Field
+                  required
+                  autoCapitalize="none"
+                  placeholder="Phone"
+                  name="phone"
                   type="text"
                   autoCorrect={false}
-                  style={tw`ml-1 flex-1`}
                 />
+                <View style={tw`flex flex-row justify-between items-center  `}>
+                  <Select name="idType" placeholder="Id Type" items={idtypes} />
+                  <Field
+                    required
+                    autoCapitalize="none"
+                    placeholder="Id Number"
+                    name="idNumber"
+                    type="text"
+                    autoCorrect={false}
+                    style={tw`ml-1 flex-1`}
+                  />
+                </View>
+              </View>
+              <View style={tw`bg-blue-500 -mb-15`}>
+                <Submit title="Next" />
               </View>
             </View>
-            <View style={tw`bg-blue-500 mb-5`}>
-              <Submit title="Next" />
-            </View>
-          </View>
-        </Form>
+          </Form>
+        </>
       )}
     </>
   )

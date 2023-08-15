@@ -18,7 +18,7 @@ const LoanPlan = (props) => {
     <TouchableOpacity
       onPress={() => onMainPress(props.id)}
       style={tw.style(
-        `flex-1 border m-1 rounded-xl items-center justify-center px-5 ${
+        `flex-1 border m-1 rounded-xl items-center justify-center px-5 h-30 ${
           selected === true
             ? 'border-color-success-500 border-2'
             : 'border-color-primary-300'

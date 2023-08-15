@@ -24,22 +24,13 @@ export const Auth = createSlice({
     loginRequested: (state) => {
       state.loading = true
     },
-    loginSucceed: async (state, action) => {
-      try {
-        storage.store('user', 'userdata')
-        setHeader('authorization', action.payload.accessToken)
-        state.token = action.payload.accessToken
-        state.loading = false
-        state.user = action.payload.Person
+    loginSucceed: (state, action) => {
+      setHeader('authorization', action.payload.accessToken)
+      state.token = action.payload.accessToken
+      state.loading = false
+      state.user = action.payload.Person
 
-        /*{
-        Person: action.payload.Person,
-        accessToken: action.payload.accessToken,
-      }*/
-        state.lastFetch = Date.now()
-      } catch (error) {
-        console.log(error)
-      }
+      state.lastFetch = Date.now()
     },
     getAccountRequested: (state) => {
       state.loading = true

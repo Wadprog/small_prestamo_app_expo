@@ -11,6 +11,7 @@ const TimeFilter = ({ text, selected, onSelect }) => {
         title={text}
         appearance="outline"
         style={tw.style(` m-1 border-2`, shadowBorder(selected))}
+        onPress={onSelect}
       />
     </View>
   )

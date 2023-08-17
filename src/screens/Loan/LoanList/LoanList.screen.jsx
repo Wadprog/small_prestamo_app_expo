@@ -2,6 +2,7 @@ import { View } from 'react-native'
 import React from 'react'
 import { List, Divider } from '@ui-kitten/components'
 import { useSelector, useDispatch } from 'react-redux'
+import _ from 'lodash'
 
 import Header from './components/Header'
 import Screen from '../../../components/screen'
@@ -14,6 +15,17 @@ import { requestLoan, getLoans } from '../../../store/loans'
 const Timeline = () => {
   const dispatch = useDispatch()
   const { data: loans, loading, error } = useSelector(getLoans)
+  const [searchParams, setSearchParams] = React.useState({})
+
+  const handleAddParams = (obj) => {
+    setSearchParams((current) => ({ ...current, ...obj }))
+  }
+  const handleRemoveParams = (keys) => {
+    keys.forEach((key) => {
+      if (!_.hasIn(searchParams, key)) return
+      setSearchParams(_.omit(searchParams, key))
+    })
+  }
 
   React.useEffect(() => {
     dispatch(requestLoan())
@@ -35,7 +47,13 @@ const Timeline = () => {
           ItemSeparatorComponent={Divider}
         />
       )}
-      <FilterModal visible={filterOpen} OnClose={() => setFilterOpen(false)} />
+      <FilterModal
+        visible={filterOpen}
+        OnClose={() => setFilterOpen(false)}
+        onFilerAdd={handleAddParams}
+        onFilterRemove={handleRemoveParams}
+        onDoneFiltering={() => dispatch(requestLoan(searchParams))}
+      />
     </Screen>
   )
 }

@@ -47,17 +47,20 @@ export const Loan = createSlice({
   },
 })
 
-export const requestLoan = () => (dispatch) => {
-  dispatch(
-    action.apiCallBegan({
-      url: '/loans',
-      method: 'GET',
-      onSuccess: Loan.actions.loansReceived.type,
-      onStart: Loan.actions.loansRequested.type,
-      onError: Loan.actions.loanRequestFailed.type,
-    })
-  )
-}
+export const requestLoan =
+  (params = {}) =>
+  (dispatch) => {
+    dispatch(
+      action.apiCallBegan({
+        url: '/loans',
+        method: 'GET',
+        params,
+        onSuccess: Loan.actions.loansReceived.type,
+        onStart: Loan.actions.loansRequested.type,
+        onError: Loan.actions.loanRequestFailed.type,
+      })
+    )
+  }
 
 export const CreateLoan = (data) => (dispatch) => {
   dispatch(

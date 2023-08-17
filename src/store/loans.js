@@ -22,7 +22,7 @@ export const Loan = createSlice({
     loansReceived: (state, action) => {
       state.error = null
       state.loading = false
-      state.data = action.payload
+      state.data = action.payload.data
       state.lastFetch = Date.now()
     },
 
@@ -47,7 +47,7 @@ export const Loan = createSlice({
   },
 })
 
-export const RequestLoan = () => (dispatch) => {
+export const requestLoan = () => (dispatch) => {
   dispatch(
     action.apiCallBegan({
       url: '/loans',

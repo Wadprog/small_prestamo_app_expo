@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useStripe } from '@stripe/stripe-react-native'
-// import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import RequestPayment from './components/RequestPayment'
 import PaymentSuccesful from './components/PaymentSuccesful'
@@ -22,21 +21,15 @@ const Makepayment = () => {
   const paymentIntent = useSelector(getPaymentIntent)
   const { initPaymentSheet, presentPaymentSheet } = useStripe()
 
-  // console.log('paymentIntent', paymentIntent)
-  console.log('user', user)
+  console.log('paymentIntent', paymentIntent)
 
   const show_payment_sheet = async () => {
     if (
       paymentIntent.loading ||
       paymentIntent.error ||
-      !paymentIntent.data.client_secret
+      !paymentIntent.data?.client_secret
     ) {
-      console.log('error in show payment sheet')
-      console.log({
-        ld: paymentIntent.loading,
-        err: paymentIntent.error,
-        sc: paymentIntent.data.client_secret,
-      })
+      console.log('Not ready to show payment sheet')
       return
     }
 
@@ -46,20 +39,23 @@ const Makepayment = () => {
           paymentIntentClientSecret: paymentIntent.data.client_secret,
         })
 
+        console.log({ initPaymentSheetResponse })
+
         if (initPaymentSheetResponse.error) {
           console.log('error innitiation payment sheet')
-          console.log('error', initPaymentSheetResponse.error)
+          console.log(initPaymentSheetResponse.error)
         } else {
           console.log('success innitiation payment sheet')
           console.log({ initPaymentSheetResponse })
           console.log('About to present payment sheet')
-          const paymentResponse = await presentPaymentSheet()
-          if (paymentResponse.error) {
-            console.log('error ')
-            console.log(paymentResponse.error)
-            return
-          }
+          await presentPaymentSheet()
+          // if (paymentResponse.error) {
+          //   console.log('error ')
+          //   console.log(paymentResponse.error)
+          //   return
+          // }
           console.log('Dispatching status completed')
+
           dispatch(patchPaymentIntent({ status: 'completed' }))
         }
       } catch (error) {

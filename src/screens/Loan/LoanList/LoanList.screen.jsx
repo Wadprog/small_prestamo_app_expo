@@ -1,33 +1,37 @@
 import { View } from 'react-native'
 import React from 'react'
 import { List, Divider } from '@ui-kitten/components'
+import { useSelector, useDispatch } from 'react-redux'
 
 import Header from './components/Header'
-import FilterModal from './components/Modal/FilterModal'
 import Screen from '../../../components/screen'
-import Loan from '../../../components/Loan/Loan.component'
+import FilterModal from './components/Modal/FilterModal'
 import LoanEmptyList from '../../../components/FullError'
+import Loan from '../../../components/Loan/Loan.component'
+
+import { requestLoan, getLoans } from '../../../store/loans'
 
 const Timeline = () => {
-  const Loans = [
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
-    { id: 6 },
-  ]
+  const dispatch = useDispatch()
+  const { data: loans, loading, error } = useSelector(getLoans)
+
+  React.useEffect(() => {
+    dispatch(requestLoan())
+  }, [])
+
+  console.log({ loans, loading, error })
+
   const [filterOpen, setFilterOpen] = React.useState(false)
   return (
     <Screen>
       <Header onFileterBtnPress={() => setFilterOpen(true)} />
 
-      {Loans.length === 0 ? (
+      {loans.length === 0 ? (
         <LoanEmptyList errorMsg="No loan in this category" secondLine="" />
       ) : (
         <List
-          data={Loans}
-          renderItem={({ item, idx }) => <Loan />}
+          data={loans}
+          renderItem={({ item }) => <Loan key={item.id} {...item} />}
           ItemSeparatorComponent={Divider}
         />
       )}

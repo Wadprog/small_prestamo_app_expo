@@ -37,6 +37,7 @@ export const Auth = createSlice({
     },
 
     logged: (state, action) => {
+      // await remove('user')
       const { accessToken, employee } = action.payload
       setHeader('authorization', accessToken)
       state.loading = false

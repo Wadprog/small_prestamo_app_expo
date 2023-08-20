@@ -6,7 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 // // Importing the App Navigators.
 import AccountNavigator from './Account'
 import ChatNavigator from './Chat'
-import FeedNavigator from './Feed'
+import FeedNavigator from './Loan'
 
 // import MiddleButton from './MainButton'
 import routes from './routes'

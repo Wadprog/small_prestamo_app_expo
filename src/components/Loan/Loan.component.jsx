@@ -1,11 +1,10 @@
-import { View } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { Card, CircularProgressBar, Text, Divider } from '@ui-kitten/components'
-
+import { useNavigation } from '@react-navigation/native'
 import { formatDistance, isAfter } from 'date-fns'
 
 import tw from '../../lib/tailwind'
-import { de, is } from 'date-fns/locale'
 
 const Loan = ({
   borrower,
@@ -16,9 +15,13 @@ const Loan = ({
   next_payment,
   plan,
 }) => {
+  const navigate = useNavigation()
   return (
     <Card style={tw`my-2 rounded-xl mx-1`}>
-      <View style={tw`flex flex-row items-center justify-between`}>
+      <TouchableOpacity
+        style={tw`flex flex-row items-center justify-between`}
+        onPress={() => navigate.navigate('LoanProfile', { id })}
+      >
         <View style={tw`flex flex-row items-center justify-center`}>
           <Text category="h6" style={tw`mr-2`}>
             #{id}
@@ -40,7 +43,7 @@ const Loan = ({
             }
           />
         </View>
-      </View>
+      </TouchableOpacity>
       <Divider style={tw` bg-gray-100 my-2`} />
       <View style={tw`flex flex-row items-center justify-between`}>
         <View style={tw`p-1 bg-gray-100 rounded-full my-1`}>

@@ -38,7 +38,15 @@ const SettingNav = ({ onPress, title }) => {
       <View
         style={tw`flex flex-row items-center justify-between bg-white py-3 px-2`}
       >
-        <Text style={tw`text-lg font-bold`}>{title}</Text>
+        <View style={tw`justify-center `}>
+          <MaterialCommunityIcons
+            name="arrow-right"
+            size={24}
+            color="black"
+            style={tw`mr-2`}
+          />
+          <Text style={tw`text-lg font-bold`}>{title}</Text>
+        </View>
         <MaterialCommunityIcons
           name="arrow-right"
           size={24}
@@ -50,7 +58,7 @@ const SettingNav = ({ onPress, title }) => {
   )
 }
 const SettingForm = ({ handleSubmit, onBack, title }) => {
-    const auth = useSelector(getCurrentUser)
+  const auth = useSelector(getCurrentUser)
   return (
     <Form
       validationSchema={ValidationSchema}
@@ -89,7 +97,6 @@ const SettingForm = ({ handleSubmit, onBack, title }) => {
             <Text category="s1">{auth.user.company.name}</Text>
           </View>
         </View>
-        
       </View>
 
       <View style={tw` my-4 rounded-xl bg-red-500 overflow-hidden mx-3`}></View>

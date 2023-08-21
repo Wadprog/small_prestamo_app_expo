@@ -8,6 +8,7 @@ const initialState = {
   data: [],
   lastFetch: null,
   error: null,
+  current_loan: null,
 }
 
 export const Loan = createSlice({
@@ -22,7 +23,7 @@ export const Loan = createSlice({
     loansReceived: (state, action) => {
       state.error = null
       state.loading = false
-      state.data = action.payload
+      state.data = action.payload.data
       state.lastFetch = Date.now()
     },
 
@@ -39,6 +40,7 @@ export const Loan = createSlice({
       state.loading = false
       state.data = [...state.data, action.payload]
       state.lastFetch = Date.now()
+      state.current_loan = action.payload
     },
     createLoanFailed: (state, action) => {
       state.loading = false
@@ -47,17 +49,31 @@ export const Loan = createSlice({
   },
 })
 
-export const RequestLoan = () => (dispatch) => {
+export const getLoan = (id) => (dispatch) => {
   dispatch(
     action.apiCallBegan({
-      url: '/loans',
+      url: `/loans/${id}`,
       method: 'GET',
-      onSuccess: Loan.actions.loansReceived.type,
-      onStart: Loan.actions.loansRequested.type,
-      onError: Loan.actions.loanRequestFailed.type,
+      onSuccess: Loan.actions.createLoanReceived.type,
+      onStart: Loan.actions.createLoanRequested.type,
+      onError: Loan.actions.createLoanFailed.type,
     })
   )
 }
+export const requestLoan =
+  (params = {}) =>
+  (dispatch) => {
+    dispatch(
+      action.apiCallBegan({
+        url: '/loans',
+        method: 'GET',
+        params,
+        onSuccess: Loan.actions.loansReceived.type,
+        onStart: Loan.actions.loansRequested.type,
+        onError: Loan.actions.loanRequestFailed.type,
+      })
+    )
+  }
 
 export const CreateLoan = (data) => (dispatch) => {
   dispatch(

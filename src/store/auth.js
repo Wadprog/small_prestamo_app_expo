@@ -36,7 +36,8 @@ export const Auth = createSlice({
       state.lastFetch = Date.now()
     },
 
-    logged: (state, action) => {
+    logged:(state, action) => {
+      // await remove('user')
       const { accessToken, employee } = action.payload
       setHeader('authorization', accessToken)
       state.loading = false

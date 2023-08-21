@@ -2,9 +2,10 @@ import React from 'react'
 import { useFormikContext } from 'formik'
 import PropTypes from 'prop-types'
 import { MotiView, useAnimationState } from 'moti'
-import { Text, View, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 
 import tw from '../../lib/tailwind'
+import Text from '../Text'
 
 function SettingSwitch({
   name,
@@ -12,6 +13,7 @@ function SettingSwitch({
   label,
   labelStyle,
   value = false,
+  LeftIcon = null,
 }) {
   const { setFieldValue } = useFormikContext()
   const animationState = useAnimationState({
@@ -52,9 +54,14 @@ function SettingSwitch({
         contentContainerStyle,
       ]}
     >
-      <Text style={tw.style(`font-bold text-lg capitalize`, labelStyle)}>
-        {label || name}
-      </Text>
+      <View style={tw`flex flex-row gap-2`}>
+        {LeftIcon && <LeftIcon />}
+        <Text
+          style={tw.style(`text-lg  font-semibold  capitalize`, labelStyle)}
+        >
+          {label || name}
+        </Text>
+      </View>
       <TouchableOpacity
         onPress={() => {
           setVal(!val)

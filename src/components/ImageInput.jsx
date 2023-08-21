@@ -1,32 +1,34 @@
-import { View, Image, TouchableWithoutFeedback } from 'react-native';
-import React from 'react';
-import PropTypes from 'prop-types';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import * as ImagePicker from 'expo-image-picker';
+import { View, Image, TouchableWithoutFeedback } from 'react-native'
+import React from 'react'
+import PropTypes from 'prop-types'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+import * as ImagePicker from 'expo-image-picker'
 // Custom  dependencies
-import tw from '../lib/tailwind';
+import tw from '../lib/tailwind'
+import Text from './Text'
 
 const ImageInput = ({
   uri,
   onChangeImage,
   style,
   disableChangeImage = false,
+  label = '',
   ...otherProps
 }) => {
   const handleChange = async () => {
-    if (disableChangeImage) return;
+    if (disableChangeImage) return
     // No permissions request is necessary for launching the image library
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
-    });
+    })
 
     if (!result.cancelled) {
-      onChangeImage(result.uri);
+      onChangeImage(result.uri)
     }
-  };
+  }
   return (
     <TouchableWithoutFeedback onPress={handleChange}>
       <View
@@ -45,15 +47,16 @@ const ImageInput = ({
             {...otherProps}
           />
         )}
+        {label && <Text appearance="hint">{label}</Text>}
       </View>
     </TouchableWithoutFeedback>
-  );
-};
+  )
+}
 
 ImageInput.propTypes = {
   uri: PropTypes.string,
   onChangeImage: PropTypes.func.isRequired,
   disableChangeImage: PropTypes.bool,
   style: PropTypes.object,
-};
-export default ImageInput;
+}
+export default ImageInput

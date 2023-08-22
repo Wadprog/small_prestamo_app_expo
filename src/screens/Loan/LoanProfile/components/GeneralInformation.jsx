@@ -1,8 +1,8 @@
-import { View } from 'react-native'
 import React from 'react'
+import { View } from 'react-native'
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 import tw from '../../../../lib/tailwind'
-
 import Text from '../../../../components/Text'
 
 const Row = ({ title, value }) => {
@@ -15,20 +15,58 @@ const Row = ({ title, value }) => {
     </View>
   )
 }
-const GeneralInformation = () => {
+const currency_formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2,
+})
+
+const GeneralInformation = ({ loanDetails }) => {
+  console.log('\n\n***GeneralInformation***\n\n')
+  console.log({ loanDetails })
+
   return (
     <>
-      <Text style={tw`text-left mt-3 mb-2`}>Loan Details</Text>
-      <Row title="Maturity date " value="now" />
+      <Row
+        title="Maturity date "
+        value={
+          loanDetails?.maturity_date &&
+          formatDistanceToNow(new Date(loanDetails?.maturity_date), {
+          addSuffix: true,
+        })}
+      />
       <Row title="Creator" value=" Juan Eric" />
-      <Row title="Interest" value="10%" />
-      <Row title="Issue Date" value="26/43/20" />
-      <Row title="Principal deb" value="5%" />
-      <Row title="Maturity Date" value="Juan Eric" />
-      <Row title="Interest balance" value="5%" />
-      <Row title="Maturity Date" value="26/43/20" />
-      <Row title="Over due Principal Balance" value="500" />
-      <Row title="Over due Principl Interest" value="26/43/20" />
+      <Row
+        title="Issue Date"
+        value={
+          loanDetails?.issue_date &&
+          formatDistanceToNow(new Date(loanDetails?.issue_date), {
+            addSuffix: true,
+          })
+        }
+      />
+      <Row
+        title="Principal deb"
+        value={
+          loanDetails?.debt_balance &&
+          currency_formatter.format(loanDetails?.debt_balance)
+        }
+      />
+      <Row
+        title="Interest balance"
+        value={
+          loanDetails?.interest_balance &&
+          currency_formatter.format(loanDetails?.interest_balance)
+        }
+      />
+      <Row
+        title="Over due Principal Balance"
+        value={currency_formatter.format(0)}
+      />
+      <Row
+        title="Over due Principl Interest"
+        value={currency_formatter.format(0)}
+      />
     </>
   )
 }

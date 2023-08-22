@@ -1,6 +1,7 @@
 import { View, FlatList } from 'react-native'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Modal } from '@ui-kitten/components'
 
 import Text from '../../../components/Text'
 import Button from '../../../components/Button'
@@ -29,11 +30,15 @@ const LoanProfile = ({ navigation, route }) => {
   const { current_loan, loading, error } = useSelector(getLoans)
 
   React.useEffect(() => {
-    console.log({ getLoan })
+    console.log('fetching loan')
+    console.log({ p: route.params })
     dispatch(getLoan(route.params.id))
   }, [])
 
-  const [currentTab, setCurrentab] = React.useState(null)
+  console.log('fetching loan')
+  console.log({ p: route.params })
+  const [currentTab, setCurrentab] = React.useState(route?.params.tab || 0)
+  const [modalVisible, setModalVisible] = React.useState(false)
   console.log({ currentTab })
   const CurrentTab = currentTab !== null ? tabs[currentTab].component : null
 
@@ -47,51 +52,71 @@ const LoanProfile = ({ navigation, route }) => {
               {current_loan?.loan_status}
             </Text>
           </View>
-          <Button title="Operations" />
+          <Button title="Operations" onPress={() => setModalVisible(true)} />
         </View>
         <View style={tw`bg-gray-200 rounded p-2`}>
           {/** upper part */}
 
-          <View style={tw`flex flex-row justify-between `}>
-            <View>
-              <Text>Amount</Text>
-              <Text>$ 500</Text>
-            </View>
-
-            <View>
-              <Text>Debt</Text>
-              <Text>$ 500</Text>
-            </View>
-            <View>
-              <Text>Term</Text>
-              <Text>$ 500</Text>
-            </View>
-
-            <View>
-              <Text> Next Payment</Text>
-              <Text>$ 500</Text>
-              <Text>26/43/20</Text>
-            </View>
-          </View>
-
+          <FlatList
+            style={tw``}
+            horizontal
+            data={[
+              { title: 'Amount', value: 500 },
+              { title: 'Debt', value: 500 },
+              { title: 'Term', value: 500 },
+              { title: 'Next Payment', value: current_loan?.next_payment },
+            ]}
+            renderItem={({ item }) => (
+              <View style={tw`flex  items-center justify-center mx-5`}>
+                <Text style={tw`font-bold`}> {item.value}</Text>
+                <Text appearance="hint">{item.title}</Text>
+              </View>
+            )}
+          />
           <View style={tw` bg-gray-300 h-1 w-100 my-2`} />
           {/** bottom part */}
-          <View style={tw`flex flex-row justify-left flex-wrap`}>
-            {tabs.map((item, idx) => (
+          <FlatList
+            style={tw`flex flex-row justify-left flex-wrap`}
+            horizontal
+            data={tabs}
+            renderItem={({ item, index }) => (
               <Button
                 {...item}
-                disabled={currentTab === idx}
+                disabled={currentTab === index}
                 style={tw`px-1 mx-1 my-1 w- `}
                 appearance="outline"
                 onPress={() => {
-                  setCurrentab(idx)
+                  setCurrentab(index)
                 }}
               />
-            ))}
-          </View>
+            )}
+          />
         </View>
-        {currentTab !== null && <CurrentTab />}
+        {currentTab !== null && <CurrentTab loanDetails={current_loan} />}
       </View>
+      <Modal
+        visible={modalVisible}
+        backdropStyle={tw`bg-black bg-opacity-50`}
+        onBackdropPress={() => setModalVisible(false)}
+      >
+        <Button
+          title="Make Payment"
+          onPress={() =>
+            navigation.navigate('paymentForm', {
+              id: 1,
+              handleSubmit: () => {
+                console.log('submit')
+                navigation.navigate('LoanProfile', {
+                  id: current_loan?.id,
+                  tab: 4,
+                })
+              },
+            })
+          }
+        />
+        <Button title="Cancel Loan" />
+        <Button title="Renew Loan" />
+      </Modal>
     </Screen>
   )
 }

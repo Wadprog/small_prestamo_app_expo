@@ -1,39 +1,39 @@
-import React from 'react'
-import { Text, View } from 'react-native'
-import * as Yup from 'yup'
-import PropTypes from 'prop-types'
+import React from "react";
+import { Text, View } from "react-native";
+import * as Yup from "yup";
+import PropTypes from "prop-types";
 
-import tw from '../../../lib/tailwind'
+import tw from "../../../lib/tailwind";
 import {
   Form,
   Submit,
   Field,
   ImageField,
   Select,
-} from '../../../components/form'
+} from "../../../components/form";
 
 const ValidationSchema = Yup.object().shape({
   name: Yup.string().required().label("Company's name"),
   wesite_url: Yup.string().label("Company's Website"),
   org_size: Yup.string().label("Company's Size"),
-  companyLogo: Yup.string().label('Logo'),
-})
+  companyLogo: Yup.string().label("Logo"),
+});
 
 const initialValues = {
-  name: '',
-  wesite_url: '',
-  org_size: '',
-  companyLogo: '',
-}
+  name: "",
+  wesite_url: "",
+  org_size: "",
+  companyLogo: "",
+};
 
 const CompanyInfo = ({ handleSubmit, formValues }) => {
-  console.log({ formValues })
+  console.log({ formValues });
   return (
     <Form
       validationSchema={ValidationSchema}
       initialValues={formValues || initialValues}
       onSubmit={(values) => {
-        handleSubmit({ company: { ...values } })
+        handleSubmit({ company: { ...values } });
       }}
     >
       <View style={tw`flex-1`}>
@@ -47,9 +47,9 @@ const CompanyInfo = ({ handleSubmit, formValues }) => {
               name="org_size"
               placeholder="company's Size"
               items={[
-                { text: '(1-20 People)', value: 1 },
-                { text: '(20-50) People', value: 2 },
-                { text: '(50-100+) People', value: 3 },
+                { text: "(1-20 People)", value: 1 },
+                { text: "(20-50) People", value: 2 },
+                { text: "(50-100+) People", value: 3 },
               ]}
             />
 
@@ -57,9 +57,9 @@ const CompanyInfo = ({ handleSubmit, formValues }) => {
               name="size"
               placeholder="Estimated borrowers Amount"
               items={[
-                { text: '(1-20 People)', value: 1 },
-                { text: '(20-50) People', value: 2 },
-                { text: '(50-100+) People', value: 3 },
+                { text: "(1-20 People)", value: 1 },
+                { text: "(20-50) People", value: 2 },
+                { text: "(50-100+) People", value: 3 },
               ]}
             />
           </View>
@@ -69,10 +69,10 @@ const CompanyInfo = ({ handleSubmit, formValues }) => {
         </View>
       </View>
     </Form>
-  )
-}
+  );
+};
 
 CompanyInfo.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-}
-export default CompanyInfo
+};
+export default CompanyInfo;

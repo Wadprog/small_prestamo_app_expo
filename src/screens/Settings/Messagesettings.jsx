@@ -1,10 +1,10 @@
-import React from 'react'
-import { View } from 'react-native'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import React from "react";
+import { View } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import tw from '../../lib/tailwind'
-import Setting from '../../components/Select'
-import SettingSwitch from './components/SettingSwitch'
+import tw from "../../lib/tailwind";
+import Setting from "../../components/Select";
+import SettingSwitch from "./components/SettingSwitch";
 
 const Messagesettings = () => {
   return (
@@ -13,15 +13,15 @@ const Messagesettings = () => {
         style={tw`bg-white`}
         placeholder="Payment Reminder calendar"
         items={[
-          { value: 1, text: '1 Day Before' },
-          { value: 2, text: '2 Day Before' },
-          { value: 3, text: '3 Day Before' },
+          { value: 1, text: "1 Day Before" },
+          { value: 2, text: "2 Day Before" },
+          { value: 3, text: "3 Day Before" },
         ]}
         LeftIcon={() => (
           <MaterialCommunityIcons
             name="clock"
             size={24}
-            color={tw.color('color-primary-500')}
+            color={tw.color("color-primary-500")}
           />
         )}
       />
@@ -29,14 +29,14 @@ const Messagesettings = () => {
         style={tw`bg-white`}
         placeholder="Prefered notification chanel"
         items={[
-          { value: 1, text: 'Email' },
-          { value: 2, text: 'Text' },
+          { value: 1, text: "Email" },
+          { value: 2, text: "Text" },
         ]}
         LeftIcon={() => (
           <MaterialCommunityIcons
             name="clock"
             size={24}
-            color={tw.color('color-primary-500')}
+            color={tw.color("color-primary-500")}
           />
         )}
       />
@@ -46,7 +46,7 @@ const Messagesettings = () => {
           <MaterialCommunityIcons
             name="dip-switch"
             size={24}
-            color={tw.color('color-warning-500')}
+            color={tw.color("color-warning-500")}
           />
         )}
       />
@@ -57,7 +57,7 @@ const Messagesettings = () => {
           <MaterialCommunityIcons
             name="calendar-remove"
             size={24}
-            color={tw.color('color-danger-500')}
+            color={tw.color("color-danger-500")}
           />
         )}
       />
@@ -67,7 +67,7 @@ const Messagesettings = () => {
           <MaterialCommunityIcons
             name="content-copy"
             size={24}
-            color={tw.color('color-success-500')}
+            color={tw.color("color-success-500")}
           />
         )}
       />
@@ -76,19 +76,19 @@ const Messagesettings = () => {
         style={tw`bg-white`}
         placeholder="Prefered copy chanel"
         items={[
-          { value: 1, text: 'Email' },
-          { value: 2, text: 'Text' },
+          { value: 1, text: "Email" },
+          { value: 2, text: "Text" },
         ]}
         LeftIcon={() => (
           <MaterialCommunityIcons
             name="message-processing"
             size={24}
-            color={tw.color('color-primary-500')}
+            color={tw.color("color-primary-500")}
           />
         )}
       />
     </View>
-  )
-}
+  );
+};
 
-export default Messagesettings
+export default Messagesettings;

@@ -1,15 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { View, TouchableOpacity } from 'react-native'
-import Text from '../Text'
+import React from "react";
+import PropTypes from "prop-types";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { View, TouchableOpacity } from "react-native";
+import Text from "../Text";
 // import Screen from './screen'
-import { ThemeContext } from '../../context/theme.context'
+import { ThemeContext } from "../../context/theme.context";
 
 // Custom import
-import tw from '../../lib/tailwind'
-import Modal from '../Modal'
-import Option from './Option'
+import tw from "../../lib/tailwind";
+import Modal from "../Modal";
+import Option from "./Option";
 
 export default function Select({
   items,
@@ -20,13 +20,13 @@ export default function Select({
   LeftIcon,
   ...otherProps
 }) {
-  const [selectedItem, setSelectedItem] = React.useState(value || null)
-  const [modalVisible, setModalVisible] = React.useState(false)
-  const themeContext = React.useContext(ThemeContext)
+  const [selectedItem, setSelectedItem] = React.useState(value || null);
+  const [modalVisible, setModalVisible] = React.useState(false);
+  const themeContext = React.useContext(ThemeContext);
   const themeColor =
-    themeContext.theme === 'light'
-      ? { backgroundColor: tw.color('gray-100') }
-      : { backgroundColor: 'white' }
+    themeContext.theme === "light"
+      ? { backgroundColor: tw.color("gray-100") }
+      : { backgroundColor: "white" };
   return (
     <View
       style={[tw`rounded-lg    p-3 my-1`, themeColor, style]}
@@ -43,7 +43,7 @@ export default function Select({
             <Text style={tw`font-semibold text-lg`}>{selectedItem.text}</Text>
           ) : (
             <Text style={tw`text-gray-400  text-lg`}>
-              {placeholder || 'Pick an option'}
+              {placeholder || "Pick an option"}
             </Text>
           )}
         </View>
@@ -63,15 +63,15 @@ export default function Select({
               style={themeColor}
               {...item}
               onPress={(item) => {
-                setSelectedItem(item)
-                setModalVisible(false)
+                setSelectedItem(item);
+                setModalVisible(false);
               }}
             />
           ))}
         </View>
       </Modal>
     </View>
-  )
+  );
 }
 
 Select.propTypes = {
@@ -79,4 +79,4 @@ Select.propTypes = {
   onValueChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   style: PropTypes.object,
-}
+};

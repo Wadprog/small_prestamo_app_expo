@@ -1,8 +1,8 @@
-import { TouchableOpacity } from 'react-native'
-import React from 'react'
+import { TouchableOpacity } from "react-native";
+import React from "react";
 
-import Text from '../Text'
-import tw from '../../lib/tailwind'
+import Text from "../Text";
+import tw from "../../lib/tailwind";
 
 const Option = ({ LeftIcon, style, value, text, onPress }) => {
   return (
@@ -13,7 +13,7 @@ const Option = ({ LeftIcon, style, value, text, onPress }) => {
       {LeftIcon && <LeftIcon />}
       <Text>{text}</Text>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
-export default Option
+export default Option;

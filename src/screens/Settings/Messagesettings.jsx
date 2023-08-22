@@ -1,25 +1,92 @@
-import { View, Text } from 'react-native'
 import React from 'react'
+import { View } from 'react-native'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+
+import tw from '../../lib/tailwind'
+import Setting from '../../components/Select'
+import SettingSwitch from './components/SettingSwitch'
 
 const Messagesettings = () => {
   return (
-    <View>
-      <Text>Pick form list how many days before to send notification</Text>
+    <View style={tw`py-5 px-2 gap-5`}>
+      <Setting
+        style={tw`bg-white`}
+        placeholder="Payment Reminder calendar"
+        items={[
+          { value: 1, text: '1 Day Before' },
+          { value: 2, text: '2 Day Before' },
+          { value: 3, text: '3 Day Before' },
+        ]}
+        LeftIcon={() => (
+          <MaterialCommunityIcons
+            name="clock"
+            size={24}
+            color={tw.color('color-primary-500')}
+          />
+        )}
+      />
+      <Setting
+        style={tw`bg-white`}
+        placeholder="Prefered notification chanel"
+        items={[
+          { value: 1, text: 'Email' },
+          { value: 2, text: 'Text' },
+        ]}
+        LeftIcon={() => (
+          <MaterialCommunityIcons
+            name="clock"
+            size={24}
+            color={tw.color('color-primary-500')}
+          />
+        )}
+      />
+      <SettingSwitch
+        label="Switch to other channel?"
+        LeftIcon={() => (
+          <MaterialCommunityIcons
+            name="dip-switch"
+            size={24}
+            color={tw.color('color-warning-500')}
+          />
+        )}
+      />
 
-      <Text>1 day before</Text>
-      <Text>2 day before</Text>
-      <Text>3 day before</Text>
+      <SettingSwitch
+        label="Notify on weekends?"
+        LeftIcon={() => (
+          <MaterialCommunityIcons
+            name="calendar-remove"
+            size={24}
+            color={tw.color('color-danger-500')}
+          />
+        )}
+      />
+      <SettingSwitch
+        label="Copy on notification?"
+        LeftIcon={() => (
+          <MaterialCommunityIcons
+            name="content-copy"
+            size={24}
+            color={tw.color('color-success-500')}
+          />
+        )}
+      />
 
-      <Text>Choose for list prefered notification chanel </Text>
-
-      <Text>SMS</Text>
-      <Text>Correo</Text>
-
-      <Text> Default to other chanel if the other is not available ? </Text>
-
-      <Text> Switch Notify on weekends ?</Text>
-      <Text> Copy on notification</Text>
-      <Text>Prefered copy chanel</Text>
+      <Setting
+        style={tw`bg-white`}
+        placeholder="Prefered copy chanel"
+        items={[
+          { value: 1, text: 'Email' },
+          { value: 2, text: 'Text' },
+        ]}
+        LeftIcon={() => (
+          <MaterialCommunityIcons
+            name="message-processing"
+            size={24}
+            color={tw.color('color-primary-500')}
+          />
+        )}
+      />
     </View>
   )
 }

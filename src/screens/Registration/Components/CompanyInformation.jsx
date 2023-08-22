@@ -15,7 +15,7 @@ import {
 const ValidationSchema = Yup.object().shape({
   name: Yup.string().required().label("Company's name"),
   wesite_url: Yup.string().label("Company's Website"),
-  org_size: Yup.string().required().label("Company's Size"),
+  org_size: Yup.string().label("Company's Size"),
   companyLogo: Yup.string().label('Logo'),
 })
 
@@ -46,13 +46,21 @@ const CompanyInfo = ({ handleSubmit, formValues }) => {
             <Select
               name="org_size"
               placeholder="company's Size"
-              items={['1', '2', '3']}
+              items={[
+                { text: '(1-20 People)', value: 1 },
+                { text: '(20-50) People', value: 2 },
+                { text: '(50-100+) People', value: 3 },
+              ]}
             />
 
             <Select
               name="size"
               placeholder="Estimated borrowers Amount"
-              items={['1', '2', '3']}
+              items={[
+                { text: '(1-20 People)', value: 1 },
+                { text: '(20-50) People', value: 2 },
+                { text: '(50-100+) People', value: 3 },
+              ]}
             />
           </View>
           <View style={tw`mb-1`}>
